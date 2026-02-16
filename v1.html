@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Valentine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(to right,#ff758c,#ff7eb3);
+    color:white;
+    overflow-x:hidden;
+}
+
+/* Pages */
+.page{
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:20px;
+}
+.active{ display:flex; }
+
+h1{
+    font-size:28px;
+    width:90%;
+    line-height:38px;
+}
+
+p{
+    font-size:20px;
+    width:90%;
+    line-height:32px;
+}
+
+/* Buttons */
+button{
+    padding:15px 35px;
+    font-size:20px;
+    border:none;
+    border-radius:40px;
+    cursor:pointer;
+    margin:15px;
+    transition:0.3s;
+}
+button:hover{ transform:scale(1.1); }
+
+.yesBtn{
+    background:white;
+    color:#ff4d6d;
+    font-weight:bold;
+}
+.noBtn{
+    background:black;
+    color:white;
+    position:relative;
+}
+
+/* Gallery */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:15px;
+    width:95%;
+    margin-top:20px;
+}
+.gallery img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.4);
+    transition:0.4s;
+}
+.gallery img:hover{ transform:scale(1.1); }
+
+/* Heart Rain */
+.rainHeart{
+    position:fixed;
+    top:-20px;
+    font-size:20px;
+    animation: rainFall linear forwards;
+    pointer-events:none;
+    z-index:999;
+}
+@keyframes rainFall{
+    0%{ transform: translateY(0) rotate(0deg); opacity:1; }
+    100%{ transform: translateY(110vh) rotate(360deg); opacity:0; }
+}
+
+/* Music Button */
+#musicBtn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:1000;
+    padding:10px 20px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff4d6d;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" loop>
+    <source src="love.mp3" type="audio/mp3">
+</audio>
+<button id="musicBtn" onclick="toggleMusic()">🎵 Play Music</button>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <h1>💖 Happy Valentine’s Day Da Mama 💖</h1>
+    <button class="yesBtn" onclick="heartBurst(); nextPage(2)">Start ❤️</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+<h1>என் வாழ்க்கையில் நடந்த மிக அழகான விஷயம் — அது நீ தான் ❤️<br><br>உனக்குத்தானா? 💕</h1>
+<button class="yesBtn" onclick="heartBurst(); nextPage(3)">YES ❤️</button>
+<button class="noBtn" onmouseover="moveNo(this)">NO 😜</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+<h1>நான் தினமும் உன்னை புதுசா காதலிக்கிறேன் ❤️<br><br>நீயும் தானா? 💞</h1>
+<button class="yesBtn" onclick="heartBurst(); nextPage(4)">YES ❤️</button>
+<button class="noBtn" onmouseover="moveNo(this)">NO 😜</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+<h1>என் சந்தோஷம், என் கஷ்டம் — எல்லாத்துக்கும் காரணம் நீ தான் ❤️<br><br>உனக்கு நானும் அப்படிதானா? 💞</h1>
+<button class="yesBtn" onclick="heartBurst(); nextPage(5)">YES ❤️</button>
+<button class="noBtn" onmouseover="moveNo(this)">NO 😜</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+<h1>வாழ்க்கை முழுக்க உன்னோட கையை பிடிச்சு நடக்கணும் ❤️<br><br>உனக்கும் அதே ஆசைதானா? 💍</h1>
+<button class="yesBtn" onclick="heartBurst(); nextPage(6)">YES ❤️</button>
+<button class="noBtn" onmouseover="moveNo(this)">NO 😜</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="page6">
+<h1>எத்தனை சண்டை வந்தாலும் உன்னை விட்டுப் போக மாட்டேன் ❤️<br><br>நீயும் அப்படிதானா? 💕</h1>
+<button class="yesBtn" onclick="heartBurst(); nextPage(7)">YES ❤️</button>
+<button class="noBtn" onmouseover="moveNo(this)">NO 😜</button>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="page7">
+<h1>நான் உன்னை காதலிக்கிறேன்… இன்றும் நாளையும் எப்போதும் ❤️</h1>
+<button class="yesBtn" onclick="heartBurst(); nextPage(8)">Read My Heart 💌</button>
+</div>
+
+<!-- PAGE 8 - LETTER -->
+<div class="page" id="page8">
+<h1>💌 Mini Love Letter 💌</h1>
+
+<p>
+என் அன்பே,<br><br>
+
+என் வாழ்க்கையில் நடந்த மிக அழகான அதிசயம் நீ தான்.  
+நீ வந்த பிறகு என் உலகம் நிறமாயிற்று.  
+என் சிரிப்பின் காரணம் நீ…  
+என் அமைதியின் காரணம் நீ…  
+என் உறுதியின் காரணம் கூட நீ தான்.  
+
+நான் strong என்று எல்லோரும் நினைப்பாங்க,  
+ஆனா என் உள்ளுக்குள் நான் தேடுவது உன் அன்பு மட்டும் தான்.  
+
+வாழ்க்கை முழுக்க உன்னோட கையை பிடிச்சு  
+சந்தோஷமாகவும், சண்டையோடும், சிரிப்போடும்,  
+ஒன்றாக நடக்கணும்.  
+
+நான் உன்னை காதலிக்கிறேன்…  
+இன்று மட்டும் இல்ல…  
+என் கடைசி மூச்சு வரை ❤️  
+
+என்றும் உன்னுடையவள் 💕
+</p>
+<button class="yesBtn" onclick="heartBurst(); nextPage(9)">Memories 📸</button>
+</div>
+
+<!-- PAGE 9 - 40 PHOTOS -->
+<div class="page" id="page9">
+<h1>💖 Our 40 Beautiful Memories 💖</h1>
+<div class="gallery" id="gallery"></div>
+</div>
+
+<script>
+function nextPage(num){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("page"+num).classList.add("active");
+}
+
+function moveNo(btn){
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*80+"%";
+    btn.style.left=Math.random()*80+"%";
+}
+
+/* Heart Rain */
+function createRainHeart(){
+    const heart=document.createElement("div");
+    heart.classList.add("rainHeart");
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*25+15)+"px";
+    heart.style.animationDuration=(Math.random()*3+3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>{ heart.remove(); },6000);
+}
+setInterval(createRainHeart,250);
+
+/* Heart Burst */
+function heartBurst(){
+    for(let i=0;i<25;i++){
+        const burst=document.createElement("div");
+        burst.innerHTML="❤️";
+        burst.style.position="fixed";
+        burst.style.left="50%";
+        burst.style.top="50%";
+        burst.style.fontSize="20px";
+        burst.style.pointerEvents="none";
+        burst.style.zIndex="1000";
+        const x=(Math.random()-0.5)*400;
+        const y=(Math.random()-0.5)*400;
+        burst.animate([
+            {transform:"translate(0,0)",opacity:1},
+            {transform:`translate(${x}px,${y}px)`,opacity:0}
+        ],{duration:800,easing:"ease-out"});
+        document.body.appendChild(burst);
+        setTimeout(()=>{ burst.remove(); },800);
+    }
+}
+
+/* Music Control */
+const music=document.getElementById("bgMusic");
+const musicBtn=document.getElementById("musicBtn");
+
+window.addEventListener("load",()=>{
+    music.volume=0.5;
+    music.play().then(()=>{
+        musicBtn.innerHTML="🎵 Pause Music";
+    }).catch(()=>{
+        musicBtn.innerHTML="🎵 Play Music";
+    });
+});
+
+function toggleMusic(){
+    if(music.paused){
+        music.play();
+        musicBtn.innerHTML="🎵 Pause Music";
+    }else{
+        music.pause();
+        musicBtn.innerHTML="🎵 Play Music";
+    }
+}
+
+/* Load 40 Images */
+const gallery=document.getElementById("gallery");
+for(let i=1;i<=40;i++){
+    const img=document.createElement("img");
+    img.src="img"+i+".jpeg";
+    gallery.appendChild(img);
+}
+</script>
+
+</body>
+</html>
